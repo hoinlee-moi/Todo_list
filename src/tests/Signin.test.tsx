@@ -1,11 +1,10 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Signin from "../pages/Signin";
 import axios from "axios";
 
-
-jest.mock("axios")
-const mockedAxios = axios as jest.Mocked<typeof axios>
+jest.mock("axios");
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("<Signup/>", () => {
   beforeEach(() => {
@@ -54,4 +53,20 @@ describe("<Signup/>", () => {
   });
 
   //로그인 버튼 누를시 api요청 후 todo로 리다이렉트 되는지 확인
+  test("signinAPI request successful and redirect todo", async () => {
+    const emailInput = screen.getByRole("input", { name: "email" });
+    const passwordInput = screen.getByRole("input", { name: "password" });
+    const signinButton = screen.getByTestId("signin-button");
+
+    fireEvent.change(emailInput, { target: { value: "test@test.com" } });
+    fireEvent.change(passwordInput, { target: { value: "testpassword" } });
+
+    mockedAxios.post.mockResolvedValueOnce({ status: 200 });
+
+    fireEvent.click(signinButton);
+
+    await waitFor(() => {
+      expect(window.location.pathname).toBe("/todo");
+    });
+  });
 });
