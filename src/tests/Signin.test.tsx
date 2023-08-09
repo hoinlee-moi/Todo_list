@@ -42,8 +42,8 @@ describe("<Signup/>", () => {
 
   // 유효성 검사 통과시 버튼 disable 해제 되는지 확인
   test("enable login button after validation", () => {
-    const emailInput = screen.getByRole("input", { name: "email" });
-    const passwordInput = screen.getByRole("input", { name: "password" });
+    const emailInput = screen.getByTestId("email-input");
+    const passwordInput = screen.getByTestId("password-input");
     const signinButton = screen.getByTestId("signin-button");
 
     fireEvent.change(emailInput, { target: { value: "test@test.com" } });
@@ -54,8 +54,8 @@ describe("<Signup/>", () => {
 
   //로그인 버튼 누를시 api요청 후 todo로 리다이렉트 되는지 확인
   test("signinAPI request successful and redirect todo", async () => {
-    const emailInput = screen.getByRole("input", { name: "email" });
-    const passwordInput = screen.getByRole("input", { name: "password" });
+    const emailInput = screen.getByTestId("email-input");
+    const passwordInput = screen.getByTestId("password-input");
     const signinButton = screen.getByTestId("signin-button");
 
     fireEvent.change(emailInput, { target: { value: "test@test.com" } });
