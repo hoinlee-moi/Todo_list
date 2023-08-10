@@ -1,9 +1,8 @@
-import { Children } from "react";
 
 interface ButtonProps {
   children: string;
   style?: string;
-  disabled: boolean;
+  disabled?: boolean;
   clickHandle: () => void;
 }
 
