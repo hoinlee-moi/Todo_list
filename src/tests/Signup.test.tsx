@@ -51,6 +51,15 @@ describe("<Signup/>", () => {
     expect(signupButton).not.toBeDisabled();
   });
 
+  //취소 버튼 누를시 home으로 리다이렉트 되는지 확인
+  test("cancel button click redirect home", async () => {
+    const cancelButton = screen.getByRole("button", { name: "취소" });
+
+    await fireEvent.click(cancelButton);
+
+    expect(screen.getByText(/todo/i)).toBeInTheDocument();
+  });
+
   //API 통신 테스트 후 성공시 리다이렉트 동작 확인
   test("signupAPI request successful and redirect signin", async () => {
     const emailInput = screen.getByTestId("email-input");
@@ -70,7 +79,7 @@ describe("<Signup/>", () => {
     fireEvent.click(signupButton);
 
     await waitFor(() => {
-      expect(window.location.pathname).toBe("/signin");
+      expect(screen.getByText(/로그인/i)).toBeInTheDocument();
     });
   });
 });

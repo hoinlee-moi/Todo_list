@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Signin from "../pages/Signin";
@@ -52,6 +53,15 @@ describe("<Signup/>", () => {
     expect(signinButton).not.toBeDisabled();
   });
 
+  //취소 버튼 누를시 home으로 리다이렉트 되는지 확인
+  test("cancel button click redirect home", async () => {
+    const cancelButton = screen.getByRole("button", { name: "취소" });
+
+    await fireEvent.click(cancelButton);
+
+    expect(screen.getByText(/todo/i)).toBeInTheDocument();
+  });
+
   //로그인 버튼 누를시 api요청 후 todo로 리다이렉트 되는지 확인
   test("signinAPI request successful and redirect todo", async () => {
     const emailInput = screen.getByTestId("email-input");
@@ -61,19 +71,17 @@ describe("<Signup/>", () => {
     fireEvent.change(emailInput, { target: { value: "test@test.com" } });
     fireEvent.change(passwordInput, { target: { value: "testpassword" } });
 
-    mockedAxios.post.mockResolvedValueOnce(
-      mockedAxios.post.mockResolvedValueOnce(() => {
-        //로딩 컴포넌트가 뜨는지 확인
-        const loadingComponent = screen.getByTestId("loading");
-        expect(loadingComponent).toBeInTheDocument();
-        return Promise.resolve({ status: 200 });
-      })
-    );
+    mockedAxios.post.mockResolvedValueOnce(() => {
+      //로딩 컴포넌트가 뜨는지 확인
+      const loadingComponent = screen.getByTestId("loading");
+      expect(loadingComponent).toBeInTheDocument();
+      return Promise.resolve({ status: 200 });
+    });
 
     fireEvent.click(signinButton);
 
     await waitFor(() => {
-      expect(window.location.pathname).toBe("/todo");
+      expect(screen.getByText(/TODO/i)).toBeInTheDocument();
     });
   });
 });
