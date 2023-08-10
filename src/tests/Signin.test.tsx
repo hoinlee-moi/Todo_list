@@ -61,7 +61,14 @@ describe("<Signup/>", () => {
     fireEvent.change(emailInput, { target: { value: "test@test.com" } });
     fireEvent.change(passwordInput, { target: { value: "testpassword" } });
 
-    mockedAxios.post.mockResolvedValueOnce({ status: 200 });
+    mockedAxios.post.mockResolvedValueOnce(
+      mockedAxios.post.mockResolvedValueOnce(() => {
+        //로딩 컴포넌트가 뜨는지 확인
+        const loadingComponent = screen.getByTestId("loading");
+        expect(loadingComponent).toBeInTheDocument();
+        return Promise.resolve({ status: 200 });
+      })
+    );
 
     fireEvent.click(signinButton);
 

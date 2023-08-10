@@ -1,10 +1,10 @@
-import { render, screen, fireEvent,waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 import Signup from "../pages/Signup";
 
-jest.mock("axios")
-const mockedAxios = axios as jest.Mocked<typeof axios>
+jest.mock("axios");
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("<Signup/>", () => {
   beforeEach(() => {
@@ -52,7 +52,7 @@ describe("<Signup/>", () => {
   });
 
   //API 통신 테스트 후 성공시 리다이렉트 동작 확인
-  test("signupAPI request successful and redirect signin", async()=>{
+  test("signupAPI request successful and redirect signin", async () => {
     const emailInput = screen.getByTestId("email-input");
     const passwordInput = screen.getByTestId("password-input");
     const signupButton = screen.getByTestId("signup-button");
@@ -60,12 +60,17 @@ describe("<Signup/>", () => {
     fireEvent.change(emailInput, { target: { value: "test@test.com" } });
     fireEvent.change(passwordInput, { target: { value: "testpassword" } });
 
-    mockedAxios.post.mockResolvedValueOnce({status:200})
+    mockedAxios.post.mockResolvedValueOnce(() => {
+      //로딩 컴포넌트가 뜨는지 확인
+      const loadingComponent = screen.getByTestId("loading");
+      expect(loadingComponent).toBeInTheDocument();
+      return Promise.resolve({ status: 200 });
+    });
 
-    fireEvent.click(signupButton)
+    fireEvent.click(signupButton);
 
-    await waitFor(()=>{
-        expect(window.location.pathname).toBe("/signin")
-    })
-  })
+    await waitFor(() => {
+      expect(window.location.pathname).toBe("/signin");
+    });
+  });
 });
