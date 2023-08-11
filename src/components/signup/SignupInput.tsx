@@ -20,15 +20,15 @@ const SignupInput = ({ inputChangeHandler }: SignupInputProps) => {
         id="email"
         type="text"
         placeholder="e-mail"
-        data-testid="email-input"
-        onChangeHandler={debounceChangeHandler}
+        dataTestId="email-input"
+        onChangeHandler={changeHandler}
       />
       <Input
         id="password"
         type="password"
         placeholder="password(8자이상)"
-        data-testid="password-input"
-        onChangeHandler={debounceChangeHandler}
+        dataTestId="password-input"
+        onChangeHandler={changeHandler}
       />
     </article>
   );
