@@ -12,8 +12,8 @@ const Home = () => {
         <h1>TODOLIST에 오신 걸 환영합니다!</h1>
       </section>
       <section className={styles.redirectBtnContainer}>
-        <Button clickHandle={signinBtnRedirectHandle}>로그인</Button>
-        <Button clickHandle={signupBtnRedirectHandle}>회원가입</Button>
+        <Button clickHandler={signinBtnRedirectHandle}>로그인</Button>
+        <Button clickHandler={signupBtnRedirectHandle}>회원가입</Button>
       </section>
     </div>
   );

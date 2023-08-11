@@ -1,19 +1,25 @@
-
 interface ButtonProps {
   children: string;
-  style?: string;
+  className?: string;
+  dataTestId?: string;
   disabled?: boolean;
-  clickHandle: () => void;
+  clickHandler: () => void;
 }
 
 const Button = ({
   children,
-  style,
+  className,
+  dataTestId,
   disabled = false,
-  clickHandle,
+  clickHandler,
 }: ButtonProps) => {
   return (
-    <button className={style} disabled={disabled} onClick={clickHandle}>
+    <button
+      className={className}
+      disabled={disabled}
+      onClick={clickHandler}
+      data-testid={dataTestId}
+    >
       {children}
     </button>
   );
