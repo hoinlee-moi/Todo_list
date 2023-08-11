@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import styles from "../../styles/signup.module.css";
+import React from "react";
+import styles from "../../styles/pages/signup.module.css";
 import Input from "../ui/Input";
 import { debounceFunction } from "../../util/debounceUtil";
 
