@@ -1,3 +1,4 @@
+import React from "react";
 interface ButtonProps {
   children: string;
   className?: string;
@@ -25,4 +26,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default React.memo(Button);
