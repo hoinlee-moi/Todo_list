@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
+import { isAxiosError } from "axios";
 
 import styles from "../styles/signup.module.css";
 import Button from "../components/ui/Button";
 import SignupInput from "../components/signup/SignupInput";
 import { authType } from "../types/authTypes";
 import { validateEmail, validatePassword } from "../util/validation";
+import { signupUser } from "../util/api";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -15,8 +17,13 @@ const Signup = () => {
   });
   const [signupInvalid, setSignInvalid] = useState<boolean>(true);
   const [signupLoading, setSignupLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const cancelBtnRedirectHandler = useCallback((): void => navigate("/"), []);
+  const successSignupRedirect = useCallback(
+    (): void => navigate("/signin"),
+    []
+  );
 
   const signupInputChangeHandler = (target: string, value: string): void => {
     const newValue = newSignupValue(target, value);
@@ -34,8 +41,15 @@ const Signup = () => {
     else setSignInvalid(true);
   };
 
-  const signupBtnHandler = () => {
-    console.log(signupInputVal);
+  const signupBtnHandler: () => Promise<void> = async () => {
+    setSignupLoading(true);
+    const result = await signupUser(signupInputVal);
+    if (result?.status === 201) {
+      successSignupRedirect();
+      return;
+    }
+    if (result?.status === 400) setErrorMessage(result.data.message);
+    setSignupLoading(false);
   };
 
   return (
@@ -43,6 +57,7 @@ const Signup = () => {
       <section className={styles.signupSection}>
         <h1>회원가입</h1>
         <SignupInput inputChangeHandler={signupInputChangeHandler} />
+        {errorMessage&&<p className={styles.errorMessage}>{errorMessage}</p>}
         <article className={styles.buttonWrapper}>
           <Button
             className={signupInvalid ? "" : styles.validBtn}

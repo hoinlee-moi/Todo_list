@@ -40,6 +40,11 @@
 .invalidInput {
   border-bottom: 2px solid red;
 }
+.errorMessage {
+  color: red;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
 
 .buttonWrapper button {
   padding: 8px 15px;
