@@ -1,29 +1,37 @@
+import React, { useCallback } from "react";
 import styles from "../../styles/signup.module.css";
 import Input from "../ui/Input";
+import { debounceFunction } from "../../util/debounceUtil";
 
-interface SignupInputProps{
-    inputChangeHandler : ()=>void
+interface SignupInputProps {
+  inputChangeHandler: (target: string, value: string) => void;
 }
 
-const SignupInput = ({inputChangeHandler}:SignupInputProps) => {
+const SignupInput = ({ inputChangeHandler }: SignupInputProps) => {
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    inputChangeHandler(e.target.id, e.target.value);
+  };
+  const debounceChangeHandler = debounceFunction<
+    React.ChangeEvent<HTMLInputElement>
+  >(changeHandler, 500);
   return (
     <article className={styles.inputWrapper}>
       <Input
-        id="signupEmail"
+        id="email"
         type="text"
         placeholder="e-mail"
         data-testid="email-input"
-        onChangeHandler={inputChangeHandler}
+        onChangeHandler={debounceChangeHandler}
       />
       <Input
-        id="signupPassword"
+        id="password"
         type="password"
-        placeholder="password"
+        placeholder="password(8자이상)"
         data-testid="password-input"
-        onChangeHandler={inputChangeHandler}
+        onChangeHandler={debounceChangeHandler}
       />
     </article>
   );
 };
 
-export default SignupInput
+export default SignupInput;
