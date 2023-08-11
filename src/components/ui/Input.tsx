@@ -5,8 +5,7 @@ interface InputProps {
   placeholder: string;
   dataTestId?: string;
   className?: string;
-  // onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeHandler: any
+  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({

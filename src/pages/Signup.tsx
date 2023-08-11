@@ -38,8 +38,7 @@ const Signup = () => {
   // input state값 유효성 검사
   const validateValue = (value: authType): void => {
     if (validateEmail(value.email) && validatePassword(value.password))
-    {console.log("통과", signupInputVal)
-      setSignInvalid(false);}
+      setSignInvalid(false);
     else setSignInvalid(true);
   };
   //회원가입 버튼

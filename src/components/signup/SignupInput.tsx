@@ -21,14 +21,14 @@ const SignupInput = ({ inputChangeHandler }: SignupInputProps) => {
         type="text"
         placeholder="e-mail"
         dataTestId="email-input"
-        onChangeHandler={changeHandler}
+        onChangeHandler={debounceChangeHandler}
       />
       <Input
         id="password"
         type="password"
         placeholder="password(8자이상)"
         dataTestId="password-input"
-        onChangeHandler={changeHandler}
+        onChangeHandler={debounceChangeHandler}
       />
     </article>
   );
