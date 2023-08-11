@@ -1,10 +1,11 @@
+
 interface InputProps {
   id?: string;
   type: string;
   placeholder: string;
   dataTestId?: string;
   className?: string;
-  onChangeHandler: () => void;
+  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({
