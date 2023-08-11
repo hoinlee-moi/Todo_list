@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
-import { isAxiosError } from "axios";
 
-import styles from "../styles/signup.module.css";
+import styles from "../styles/pages/signup.module.css";
 import Button from "../components/ui/Button";
 import SignupInput from "../components/signup/SignupInput";
 import { authType } from "../types/authTypes";
