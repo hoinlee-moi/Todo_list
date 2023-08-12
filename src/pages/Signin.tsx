@@ -1,4 +1,4 @@
-import styles from "../styles/pages/signin.module.css";
+import styles from "../styles/auth/AuthPage.module.css";
 import AuthSection from "../components/auth/AuthSection";
 
 const Signin = () => {

@@ -1,10 +1,15 @@
 .atuhContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   overflow: hidden;
   background-color: #ebebeb;
+}
+.atuhContainer h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
 }
 .atuhSection {
   width: 100%;
@@ -13,10 +18,7 @@
   align-items: center;
   justify-content: center;
 }
-.atuhSection h1 {
-  font-size: 32px;
-  margin-bottom: 20px;
-}
+
 .inputWrapper {
   display: flex;
   flex-direction: column;

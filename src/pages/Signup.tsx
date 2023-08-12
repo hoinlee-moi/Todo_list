@@ -1,18 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import { useCallback, useState } from "react";
 
-import styles from "../styles/pages/signup.module.css";
-import Button from "../components/ui/Button";
-import SignupInput from "../components/auth/AuthInput";
-import { authType } from "../types/authTypes";
-import { validateEmail, validatePassword } from "../util/validation";
-import { signupUser } from "../util/api";
-import LoadingCircle from "../components/ui/LoadingCircle";
+import styles from "../styles/auth/AuthPage.module.css";
 import AuthSection from "../components/auth/AuthSection";
 
 const Signup = () => {
   return (
     <div className={styles.atuhContainer}>
+      <h1>회원가입</h1>
       <AuthSection page="signup" />
     </div>
   );

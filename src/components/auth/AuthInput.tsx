@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/pages/signup.module.css";
+import styles from "../../styles/auth/AuthPage.module.css";
 import Input from "../ui/Input";
 import { debounceFunction } from "../../util/debounceUtil";
 
@@ -13,7 +13,7 @@ const AuthInput = ({ inputChangeHandler }: SignupInputProps) => {
   };
   const debounceChangeHandler = debounceFunction<
     React.ChangeEvent<HTMLInputElement>
-  >(changeHandler, 500);
+  >(changeHandler, 200);
   return (
     <article className={styles.inputWrapper}>
       <Input
