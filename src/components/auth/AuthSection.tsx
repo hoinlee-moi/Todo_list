@@ -1,16 +1,21 @@
 import { useCallback, useState } from "react";
-import styles from "../../styles/auth/AuthSection.module.css";
 import { useNavigate } from "react-router-dom";
+import { AxiosResponse } from "axios";
+
+import styles from "../../styles/auth/AuthPage.module.css";
+
 import LoadingCircle from "../ui/LoadingCircle";
 import AuthInput from "./AuthInput";
 import Button from "../ui/Button";
 import { authType } from "../../types/authTypes";
 import { validateEmail, validatePassword } from "../../util/validation";
-import { signupUser } from "../../util/api";
+import { signinUser, signupUser } from "../../util/api";
+import { setLocalStorage } from "../../util/storage";
 
 interface AuthSectionProps {
   page: string;
 }
+type AuthApiFunction = () => Promise<void>;
 
 const AuthSection = ({ page }: AuthSectionProps) => {
   const navigate = useNavigate();
@@ -46,18 +51,48 @@ const AuthSection = ({ page }: AuthSectionProps) => {
       setAuthInvalid(false);
     else setAuthInvalid(true);
   };
+
+  //응답 에러 메세지
+  const errorResponseMessage = (
+    response: AxiosResponse<any, any> | undefined
+  ) => {
+    switch (response?.status) {
+      case 400:
+        setErrorMessage(response.data.message);
+        break;
+      case 401:
+        setErrorMessage("로그인 정보가 올바르지 않습니다");
+        break;
+      case 404:
+        setErrorMessage(response.data.message);
+        break;
+      default:
+        setErrorMessage("정보를 다시 확인해주세요");
+    }
+  };
   //회원가입 버튼
-  const signupBtnHandler: () => Promise<void> = async () => {
+  const signupBtnHandler: AuthApiFunction = async () => {
     setAuthLoading(true);
     const result = await signupUser(authInputVal);
     if (result?.status === 201) {
       successSignupRedirect();
       return;
     }
-    if (result?.status === 400) setErrorMessage(result.data.message);
+    errorResponseMessage(result);
     setAuthLoading(false);
   };
-  const signinBtnHandler = () => {};
+  //로그인 버튼
+  const signinBtnHandler: AuthApiFunction = async () => {
+    setAuthLoading(true);
+    const result = await signinUser(authInputVal);
+    if (result?.status === 200) {
+      setLocalStorage("access_token", result.data.access_token);
+      successSigninRedirect();
+      return;
+    }
+    errorResponseMessage(result);
+    setAuthLoading(false);
+  };
 
   return (
     <section className={styles.atuhSection}>
@@ -67,7 +102,7 @@ const AuthSection = ({ page }: AuthSectionProps) => {
         <LoadingCircle />
       ) : (
         <article className={styles.buttonWrapper}>
-          {page === "singup" ? (
+          {page === "signup" ? (
             <Button
               className={authInvalid ? "" : styles.validBtn}
               disabled={authInvalid}
@@ -86,7 +121,6 @@ const AuthSection = ({ page }: AuthSectionProps) => {
               로그인
             </Button>
           )}
-
           <Button clickHandler={cancelBtnRedirectHandler}>취소</Button>
         </article>
       )}
