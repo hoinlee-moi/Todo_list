@@ -1,6 +1,13 @@
+import styles from "../styles/pages/signin.module.css";
+import AuthSection from "../components/auth/AuthSection";
 
 const Signin = () => {
-    return <div>로그인페이지입니다</div>
-}
+  return (
+    <div className={styles.atuhContainer}>
+      <h1>로그인</h1>
+      <AuthSection page="signin" />
+    </div>
+  );
+};
 
-export default Signin
+export default Signin;

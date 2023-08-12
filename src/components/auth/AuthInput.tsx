@@ -7,7 +7,7 @@ interface SignupInputProps {
   inputChangeHandler: (target: string, value: string) => void;
 }
 
-const SignupInput = ({ inputChangeHandler }: SignupInputProps) => {
+const AuthInput = ({ inputChangeHandler }: SignupInputProps) => {
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     inputChangeHandler(e.target.id, e.target.value);
   };
@@ -34,4 +34,4 @@ const SignupInput = ({ inputChangeHandler }: SignupInputProps) => {
   );
 };
 
-export default SignupInput;
+export default AuthInput;
