@@ -14,3 +14,13 @@ export const signupUser = async (userData: authType) => {
     }
   }
 };
+export const signinUser = async(userData: authType) => {
+  try {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}auth/signin`,userData)
+    return response
+  } catch (error) {
+    if (isAxiosError(error)) {
+      return error.response
+    }
+  }
+}
