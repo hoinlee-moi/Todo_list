@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DUMMY } from "../../pages/Todo";
 import styles from "../../styles/pages/todo.module.css";
-import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
-const dummy = DUMMY;
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 const CompletedList = () => {
+  const dummy = DUMMY;
   return (
     <article>
       <h3>완료</h3>
@@ -16,9 +16,11 @@ const CompletedList = () => {
               className={styles.todoItem}
             >
               <label>
-                <FontAwesomeIcon icon={faSquareCheck} />
                 <input type="checkbox" defaultChecked={item.isCompleted} />
-                <span>{item.todo}</span>
+                <span className={styles.todoCustomCheck}>
+                  <FontAwesomeIcon icon={faCheck} />
+                </span>
+                <span className={styles.todoContent}>{item.todo}</span>
               </label>
             </li>
           );
