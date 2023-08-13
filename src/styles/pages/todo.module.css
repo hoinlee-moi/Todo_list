@@ -1,0 +1,50 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.pageTitle {
+  font-size: 38px;
+}
+.todoContainer {
+  width: 50%;
+  height: 95vh;
+  padding: 10px;
+  text-align: center;
+  border-radius: 30px;
+  background-color: white;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 5px #000;
+}
+.createTodoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+.inputWrap {
+  position: relative;
+  width: 50%;
+}
+.inputWrap input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #636363;
+  padding: 5px 110px 5px 10px;
+  font-size: 18px;
+  box-sizing: border-box;
+  outline: none;
+}
+.createTodoContainer button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
