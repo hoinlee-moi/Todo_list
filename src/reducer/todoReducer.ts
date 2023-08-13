@@ -5,6 +5,7 @@ interface ActionType {
   todoList?: Todo[];
   todo?: Todo;
   targetId?: number;
+  completed?: boolean;
 }
 export const todoReducer = (state: Todo[], action: ActionType): Todo[] => {
   switch (action.type) {
@@ -25,11 +26,20 @@ export const todoReducer = (state: Todo[], action: ActionType): Todo[] => {
         );
       }
       break;
+    case "COMPLETED":
+      if (action.targetId && action.completed) {
+        return state.map((item) =>
+          item.id === action.targetId
+            ? { ...item, ["isCompleted"]: action.completed! }
+            : item
+        );
+      }
+      break;
     case "DELETE":
       if (action.targetId) {
         return state.filter((item) => item.id !== action.targetId);
       }
       break;
   }
-  return state
+  return state;
 };
