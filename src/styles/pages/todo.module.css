@@ -10,7 +10,7 @@
 }
 .todoContainer {
   width: 75%;
-  height: 95vh;
+  min-height: 95vh;
   padding: 10px;
   text-align: center;
   border-radius: 30px;
