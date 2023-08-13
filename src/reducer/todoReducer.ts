@@ -12,21 +12,24 @@ export const todoReducer = (state: Todo[], action: ActionType): Todo[] => {
       if (action.todoList) {
         return action.todoList;
       }
+      break;
     case "CREATE":
       if (action.todo) {
         return [...state, action.todo];
       }
+      break;
     case "UPDATE":
       if (action.targetId && action.todo) {
         return state.map((item) =>
           item.id === action.targetId ? action.todo! : item
         );
       }
+      break;
     case "DELETE":
       if (action.targetId) {
         return state.filter((item) => item.id !== action.targetId);
       }
-    default:
-      return state;
+      break;
   }
+  return state
 };
