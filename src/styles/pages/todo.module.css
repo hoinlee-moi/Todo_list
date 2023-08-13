@@ -48,3 +48,43 @@
   background-color: #fff;
   cursor: pointer;
 }
+.listContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin: 30px 0;
+  padding: 30px;
+  box-sizing: border-box;
+}
+.listContainer article {
+  width: 45%;
+}
+.listContainer article h3 {
+  font-size: 25px;
+  color: #333;
+}
+.todoListWrap {
+  width: 100%;
+  min-height: 600px;
+  margin-top: 30px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #000;
+  background:linear-gradient(to bottom right, #ebebeb, #b6bec7);
+  box-sizing: border-box;
+}
+.todoItem {
+  width: 100%;
+  font-size: 22px;
+  text-align: left;
+  margin: 10px 10px 20px 10px;
+  
+  box-sizing: border-box;
+}
+.todoItem input {
+  display: none;
+}
+.todoItem label:before{
+  
+}
