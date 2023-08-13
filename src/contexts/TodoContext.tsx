@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { todoReducer } from "../reducer/TodoReducer";
+import { todoReducer } from "../reducer/todoReducer";
 import { Todo } from "../types/todoTypes";
 
 interface TodoContextProviderProps {
