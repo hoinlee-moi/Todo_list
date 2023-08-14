@@ -5,6 +5,8 @@ interface InputProps {
   myRef?: React.RefObject<HTMLInputElement>;
   dataTestId?: string;
   className?: string;
+  defaultChecked?: boolean;
+  defaultValue?: string;
   onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -16,7 +18,22 @@ const Input = ({
   dataTestId,
   className,
   onChangeHandler,
+  defaultChecked,
+  defaultValue,
 }: InputProps) => {
+  if (type === "checkbox") {
+    return (
+      <input
+        type={type}
+        id={id}
+        className={className}
+        defaultChecked={defaultChecked}
+        ref={myRef}
+        data-testid={dataTestId}
+        onChange={onChangeHandler}
+      />
+    );
+  }
   return (
     <input
       id={id}
@@ -25,6 +42,7 @@ const Input = ({
       placeholder={placeholder}
       data-testid={dataTestId}
       onChange={onChangeHandler}
+      defaultValue={defaultValue}
       ref={myRef}
     />
   );
