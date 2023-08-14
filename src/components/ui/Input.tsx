@@ -1,17 +1,18 @@
-
 interface InputProps {
   id?: string;
   type: string;
-  placeholder: string;
+  placeholder?: string;
+  myRef?: React.RefObject<HTMLInputElement>;
   dataTestId?: string;
   className?: string;
-  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({
   id,
   type,
   placeholder,
+  myRef,
   dataTestId,
   className,
   onChangeHandler,
@@ -24,6 +25,7 @@ const Input = ({
       placeholder={placeholder}
       data-testid={dataTestId}
       onChange={onChangeHandler}
+      ref={myRef}
     />
   );
 };

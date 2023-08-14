@@ -1,34 +1,10 @@
+import styles from "../styles/pages/todo.module.css";
+
+import TodoContextProvider from "../contexts/TodoContext";
 import CompletedList from "../components/todo/CompletedList";
 import IncompletedList from "../components/todo/IncompletedList";
 import TodoCreate from "../components/todo/TodoCreate";
-import TodoContextProvider from "../contexts/TodoContext";
-import styles from "../styles/pages/todo.module.css";
-export const DUMMY = [
-  {
-    id: 1,
-    todo: "todo2",
-    isCompleted: false,
-    userId: 1,
-  },
-  {
-    id: 2,
-    todo: "todo3",
-    isCompleted: false,
-    userId: 1,
-  },
-  {
-    id: 3,
-    todo: "todo4",
-    isCompleted: false,
-    userId: 1,
-  },
-  {
-    id: 4,
-    todo: "todo5",
-    isCompleted: true,
-    userId: 1,
-  },
-];
+
 const Todo = () => {
   return (
     <TodoContextProvider>
