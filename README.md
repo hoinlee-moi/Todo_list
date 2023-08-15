@@ -18,8 +18,9 @@
 4.npm install <br><br>
 5.npm start <br><br>
 
-> ## 배포 사이트
-
+> ## 배포 사이트 
+### [사이트 바로가기](https://wanted-pre-onboarding-frontend-eight-ebon.vercel.app/)
+url - https://wanted-pre-onboarding-frontend-eight-ebon.vercel.app/
 <br>
 
 > ## 사용 라이브러리
