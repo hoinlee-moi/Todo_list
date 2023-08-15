@@ -16,15 +16,20 @@ const TodoItem = ({ item }: TodoItemProps) => {
   const { onUpdateTodo, onDeleteTodo, onCompletedTodo } =
     useContext(TodoContext);
   const [editModeState, setEditModeState] = useState<boolean>(false);
-
+  // 투두 업데이트
   const todoUpdateHandler = () => {
-    if (editInputRef?.current?.value)
-      onUpdateTodo(item.id, editInputRef.current.value);
+    if (editInputRef?.current?.value) {
+      onUpdateTodo({ ...item, ["todo"]: editInputRef.current.value });
+      setEditModeState(false);
+    }
   };
+  // 삭제 버튼
   const todoDeleteHandler = () => onDeleteTodo(item.id);
+
+  // 체크상태 업데이트
   const todoCheckedChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (item.isCompleted !== e.target.checked) {
-      onCompletedTodo(item.id, e.target.checked);
+      onCompletedTodo({ ...item, ["isCompleted"]: e.target.checked });
     }
   };
   return (
