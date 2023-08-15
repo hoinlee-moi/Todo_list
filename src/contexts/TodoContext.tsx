@@ -1,7 +1,7 @@
 import { createContext, useEffect, useReducer } from "react";
 import { todoReducer } from "../reducer/todoReducer";
 import { Todo } from "../types/todoTypes";
-import { createTodo, getTodoList } from "../util/api";
+import { createTodo, deleteTodo, getTodoList, updateTodo } from "../util/api";
 
 interface TodoContextProviderProps {
   children: JSX.Element;
@@ -10,79 +10,56 @@ interface TodoContextProviderProps {
 interface TodoContextType {
   todoList: Todo[];
   onCreateTodo: (todo: string) => void;
-  onUpdateTodo: (id: number, todo: string) => void;
-  onCompletedTodo: (id: number, completed: boolean) => void;
+  onUpdateTodo: (todoItem: Todo) => void;
+  onCompletedTodo: (todoItem: Todo) => void;
   onDeleteTodo: (id: number) => void;
 }
 
 export const TodoContext = createContext<TodoContextType>({
   todoList: [],
   onCreateTodo: (todo) => {},
-  onUpdateTodo: (id, todo) => {},
-  onCompletedTodo: (id, completed) => {},
+  onUpdateTodo: (todoItem) => {},
+  onCompletedTodo: (todoItem) => {},
   onDeleteTodo: (id) => {},
 });
-export const DUMMY = [
-  {
-    id: 1,
-    todo: "todo2",
-    isCompleted: false,
-    userId: 1,
-  },
-  {
-    id: 2,
-    todo: "asdfasdfasdfasdfasdf",
-    isCompleted: false,
-    userId: 1,
-  },
-  {
-    id: 3,
-    todo: "asdfasdfasdfasdgasdgasvasdvbg",
-    isCompleted: true,
-    userId: 1,
-  },
-  {
-    id: 4,
-    todo: "ㅇ라오ㅜ라아ㅜ라우린우리나울ㄴㅇㄹ",
-    isCompleted: true,
-    userId: 1,
-  },
-  {
-    id: 5,
-    todo: "오늘은장보고 밥먹고",
-    isCompleted: false,
-    userId: 1,
-  },
-  {
-    id: 6,
-    todo: "투두리슨트느느다만드라으라일",
-    isCompleted: true,
-    userId: 1,
-  },
-];
+
 const TodoContextProvider = ({ children }: TodoContextProviderProps) => {
-  const [todoList, dispatch] = useReducer(todoReducer, DUMMY);
+  const [todoList, dispatch] = useReducer(todoReducer, []);
 
   useEffect(() => {
-    // initTodoList();
+    initTodoList();
   }, []);
   // todo 데이터 불러오기
   const initTodoList = async () => {
     const response = await getTodoList();
-    if (response?.status === 200) {
+    if (response?.status === 200)
       dispatch({ type: "INIT", todoList: response.data });
-    }
   };
   // 새로운 todo 추가
   const onCreateTodo = async (todo: string) => {
-    // const response = await createTodo(todo);
-    // if (response?.status === 201) {
-    //   dispatch({ type: "CREATE", todo: response.data });
-    // }
+    const response = await createTodo(todo);
+    if (response?.status === 201)
+      dispatch({ type: "CREATE", todoItem: response.data });
   };
-  const onUpdateTodo = (id: number, todo: string) => {};
-  const onCompletedTodo = (id: number, completed: boolean) => {};
-  const onDeleteTodo = (id: number) => {};
+  // todo업데이트
+  const onUpdateTodo = async (todoItem: Todo) => {
+    const response = await updateTodo(todoItem);
+    if (response?.status === 200)
+      dispatch({ type: "UPDATE", todoItem: response.data });
+  };
+  const onCompletedTodo = async (todoItem: Todo) => {
+    const response = await updateTodo(todoItem);
+    if (response?.status === 200)
+      dispatch({
+        type: "COMPLETED",
+        targetId: todoItem.id,
+        completed: todoItem.isCompleted,
+      });
+  };
+  const onDeleteTodo = async (id: number) => {
+    const response = await deleteTodo(id);
+    if (response?.status === 204) dispatch({ type: "DELETE", targetId: id });
+  };
 
   return (
     <TodoContext.Provider

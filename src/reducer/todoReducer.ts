@@ -3,7 +3,7 @@ import { Todo } from "../types/todoTypes";
 interface ActionType {
   type: string;
   todoList?: Todo[];
-  todo?: Todo;
+  todoItem?: Todo;
   targetId?: number;
   completed?: boolean;
 }
@@ -15,19 +15,19 @@ export const todoReducer = (state: Todo[], action: ActionType): Todo[] => {
       }
       break;
     case "CREATE":
-      if (action.todo) {
-        return [...state, action.todo];
+      if (action.todoItem) {
+        return [...state, action.todoItem];
       }
       break;
     case "UPDATE":
-      if (action.targetId && action.todo) {
+      if (action.todoItem) {
         return state.map((item) =>
-          item.id === action.targetId ? action.todo! : item
+          item.id === action.todoItem!.id ? action.todoItem! : item
         );
       }
       break;
     case "COMPLETED":
-      if (action.targetId && action.completed) {
+      if (action.targetId) {
         return state.map((item) =>
           item.id === action.targetId
             ? { ...item, ["isCompleted"]: action.completed! }
