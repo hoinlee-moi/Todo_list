@@ -1,11 +1,18 @@
-import styles from "../styles/pages/todo.module.css";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
+import styles from "../styles/pages/todo.module.css";
 import TodoContextProvider from "../contexts/TodoContext";
 import CompletedList from "../components/todo/CompletedList";
 import IncompletedList from "../components/todo/IncompletedList";
 import TodoCreate from "../components/todo/TodoCreate";
+import { getLocalStorage } from "../util/storage";
 
 const Todo = () => {
+  const navigation = useNavigate();
+  useEffect(() => {
+    if (!getLocalStorage("access_token")) navigation("/signin");
+  }, []);
   return (
     <TodoContextProvider>
       <div className={styles.pageContainer}>

@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import Button from "../components/ui/Button";
 import styles from "../styles/pages/home.module.css";
+import { getLocalStorage } from "../util/storage";
 
 const Home = () => {
   const navigation = useNavigate();
+  useEffect(() => {
+    if (getLocalStorage("access_token")) navigation("/todo");
+  }, []);
   const signinBtnRedirectHandle = () => navigation("signin");
   const signupBtnRedirectHandle = () => navigation("signup");
   return (
