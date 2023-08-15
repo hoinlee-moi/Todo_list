@@ -12,7 +12,7 @@ const errorResonse = (error: unknown) => {
 export const signupUser = async (userData: authType) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}auth/signup`,
+      "https://www.pre-onboarding-selection-task.shop/auth/signup",
       userData
     );
     return response;
@@ -23,7 +23,7 @@ export const signupUser = async (userData: authType) => {
 export const signinUser = async (userData: authType) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}auth/signin`,
+      "https://www.pre-onboarding-selection-task.shop/auth/signin",
       userData
     );
     return response;
@@ -34,7 +34,7 @@ export const signinUser = async (userData: authType) => {
 
 export const getTodoList = async () => {
   try {
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}todos`, {
+    const response = await axios.get("https://www.pre-onboarding-selection-task.shop/todos", {
       headers: {
         Authorization: `Bearer ${getLocalStorage("access_token")}`,
       },
@@ -48,7 +48,7 @@ export const getTodoList = async () => {
 export const createTodo = async (todo: string) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}todos`,
+      "https://www.pre-onboarding-selection-task.shop/todos",
       { todo: todo },
       {
         headers: {
@@ -65,7 +65,7 @@ export const createTodo = async (todo: string) => {
 export const updateTodo = async (todoItem: Todo) => {
   try {
     const response = await axios.put(
-      `${process.env.REACT_APP_API_URL}todos/${todoItem.id}`,
+      `https://www.pre-onboarding-selection-task.shop/todos/${todoItem.id}`,
       { todo: todoItem.todo, isCompleted: todoItem.isCompleted },
       {
         headers: { Authorization: `Bearer ${getLocalStorage("access_token")}` },
@@ -80,7 +80,7 @@ export const updateTodo = async (todoItem: Todo) => {
 export const deleteTodo = (id: number) => {
   try {
     const response = axios.delete(
-      `${process.env.REACT_APP_API_URL}todos/${id}`,
+      `https://www.pre-onboarding-selection-task.shop/todos/${id}`,
       {
         headers: { Authorization: `Bearer ${getLocalStorage("access_token")}` },
       }

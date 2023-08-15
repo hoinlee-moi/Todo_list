@@ -8,6 +8,7 @@ interface InputProps {
   defaultChecked?: boolean;
   defaultValue?: string;
   onChangeHandler?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDownHandler?: (e:React.KeyboardEvent) =>void
 }
 
 const Input = ({
@@ -18,6 +19,7 @@ const Input = ({
   dataTestId,
   className,
   onChangeHandler,
+  onKeyDownHandler,
   defaultChecked,
   defaultValue,
 }: InputProps) => {
@@ -42,6 +44,7 @@ const Input = ({
       placeholder={placeholder}
       data-testid={dataTestId}
       onChange={onChangeHandler}
+      onKeyDown={onKeyDownHandler}
       defaultValue={defaultValue}
       ref={myRef}
     />

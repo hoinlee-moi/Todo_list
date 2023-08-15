@@ -5,6 +5,7 @@ import { useContext, useRef } from "react";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { TodoContext } from "../../contexts/TodoContext";
+import { enterKeyEvent } from "../../util/enterKeyEvent";
 const TodoCreate = () => {
   const { onCreateTodo } = useContext(TodoContext);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,6 +16,9 @@ const TodoCreate = () => {
       inputRef.current.value = "";
     }
   };
+  const createEnterKeyHandler = (e: React.KeyboardEvent) => {
+    enterKeyEvent(e, createBtnClickHandler);
+  };
   return (
     <section className={styles.createTodoContainer}>
       <div className={styles.inputWrap}>
@@ -22,6 +26,7 @@ const TodoCreate = () => {
           type="text"
           placeholder="할 일을 입력해주세요"
           myRef={inputRef}
+          onKeyDownHandler={createEnterKeyHandler}
         />
         <label>
           <FontAwesomeIcon icon={faPencil} />
