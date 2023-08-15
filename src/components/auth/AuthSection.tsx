@@ -56,19 +56,11 @@ const AuthSection = ({ page }: AuthSectionProps) => {
   const errorResponseMessage = (
     response: AxiosResponse<any, any> | undefined
   ) => {
-    switch (response?.status) {
-      case 400:
-        setErrorMessage(response.data.message);
-        break;
-      case 401:
-        setErrorMessage("로그인 정보가 올바르지 않습니다");
-        break;
-      case 404:
-        setErrorMessage(response.data.message);
-        break;
-      default:
-        setErrorMessage("정보를 다시 확인해주세요");
+    if (response?.status === 400 || response?.status === 404) {
+      setErrorMessage(response.data.message);
+      return;
     }
+    setErrorMessage("정보를 다시 확인해주세요");
   };
   //회원가입 버튼
   const signupBtnHandler: AuthApiFunction = async () => {
