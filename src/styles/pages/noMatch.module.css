@@ -1,0 +1,28 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.pageContainer h1 {
+  font-size: 50px;
+}
+
+.pageContainer p {
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.pageContainer button {
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  background-color: crimson;
+  cursor: pointer;
+}
