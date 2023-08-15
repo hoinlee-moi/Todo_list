@@ -1,0 +1,51 @@
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+.titleContainer h1 {
+  text-align: center;
+  font-size: 52px;
+  animation: titleAppearAni 1.5s;
+}
+
+.redirectBtnContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+.redirectBtnContainer button {
+  border: none;
+  opacity: 0;
+  margin: 0 40px;
+  padding: 5px 10px;
+  font-size: 25px;
+  font-weight: 500;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.5s;
+  animation: titleAppearAni 1s 0.5s forwards;
+}
+.redirectBtnContainer button:hover {
+  text-shadow: 1px 1px 2px #000;
+}
+
+@keyframes titleAppearAni {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 800px) {
+  .titleContainer h1 {
+    font-size: 40px;
+  }
+}
