@@ -48,6 +48,7 @@ const TodoItem = ({ item }: TodoItemProps) => {
           className={styles.editTodoInput}
           myRef={editInputRef}
           onKeyDownHandler={updateEnterKeyHandler}
+          dataTestId="modify-input"
         />
       ) : (
         <label>

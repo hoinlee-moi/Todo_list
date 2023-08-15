@@ -21,13 +21,13 @@ const TodoEditBtnSection = ({
     <div className={styles.todoEditBtnContainer}>
       {editModeState ? (
         <>
-          <Button clickHandler={updateClickHandler}>제출</Button>
-          <Button clickHandler={editModeCancelHandler}>취소</Button>
+          <Button clickHandler={updateClickHandler} dataTestId="submit-button">제출</Button>
+          <Button clickHandler={editModeCancelHandler} dataTestId="cancel-button">취소</Button>
         </>
       ) : (
         <>
-          <Button clickHandler={editModeOpenHandler}>수정</Button>
-          <Button clickHandler={deleteCLickHandler}>삭제</Button>
+          <Button clickHandler={editModeOpenHandler} dataTestId="modify-button">수정</Button>
+          <Button clickHandler={deleteCLickHandler} dataTestId="delete-button">삭제</Button>
         </>
       )}
     </div>
